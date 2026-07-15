@@ -3,22 +3,9 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import pickle
 import os
-import gdown
 
 @st.cache_resource
 def load_models():
-    if not os.path.exists("model.pkl"):
-        with st.spinner("🔄 Loading AI model... please wait..."):
-            gdown.download(
-                "https://drive.google.com/uc?id=1gJ5gKlR9cklzaKHqbU21L4hPexWA30sm",
-                "model.pkl", quiet=False, fuzzy=True
-            )
-    if not os.path.exists("tfidf.pkl"):
-        with st.spinner("🔄 Loading vectorizer..."):
-            gdown.download(
-                "https://drive.google.com/uc?id=16o8VgN9LYpYdNhLyO7sHiOwy_ViLHAGG",
-                "tfidf.pkl", quiet=False, fuzzy=True
-            )
     model = pickle.load(open("model.pkl", "rb"))
     tfidf = pickle.load(open("tfidf.pkl", "rb"))
     return model, tfidf

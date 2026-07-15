@@ -4,10 +4,15 @@ from pydub import AudioSegment
 import pickle
 import os
 
+# Get the directory where app.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @st.cache_resource
 def load_models():
-    model = pickle.load(open("model.pkl", "rb"))
-    tfidf = pickle.load(open("tfidf.pkl", "rb"))
+    model_path = os.path.join(BASE_DIR, "model.pkl")
+    tfidf_path = os.path.join(BASE_DIR, "tfidf.pkl")
+    model = pickle.load(open(model_path, "rb"))
+    tfidf = pickle.load(open(tfidf_path, "rb"))
     return model, tfidf
 
 model, tfidf = load_models()
